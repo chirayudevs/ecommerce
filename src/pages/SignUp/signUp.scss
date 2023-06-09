@@ -1,0 +1,22 @@
+.signUp-form-main {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 200px;
+  margin: auto;
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .signUp-button {
+    margin-top: 10px;
+  }
+
+  .card-wrapper {
+    box-shadow: 5px 5px black;
+    border-color: black;
+  }
+}

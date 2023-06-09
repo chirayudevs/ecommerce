@@ -1,0 +1,33 @@
+.view-product-header {
+  display: flex;
+  alignItems: center;
+  color: white;
+}
+
+.view-product-content {
+  padding: 0 50px;
+}
+
+.view-product-breadcrumb {
+  margin: 16px 0;
+}
+
+.product-image-container {
+  width: 350px;
+  height: 350px;
+  margin: 10px;
+}
+
+.product-description-wrapper {
+  display: grid;
+  height: 100px;
+
+  .description-header {
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .description-content {
+    font-size: 20px;
+  }
+}
