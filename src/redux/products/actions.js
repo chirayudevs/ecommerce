@@ -13,7 +13,7 @@ export const FetchProducts = () => {
 
     dispatch({type: GET_PRODUCTS_REQUEST});
 
-    await Get('product', config).then((response) =>
+    await Get('product?skip=0&limit=20', config).then((response) =>
       dispatch({
         type: GET_PRODUCTS_SUCCESS,
         payload: response.data

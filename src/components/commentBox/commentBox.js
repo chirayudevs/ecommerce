@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Input } from 'antd';
-import SendOutlined from '@ant-design/icons/lib/icons/SendOutlined';
-import './commentBox.scss'
+import { useParams } from 'react-router-dom';
+import { AddCommentRequest } from '../../redux/comments/actions';
+import './commentBox.scss';
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 
 const CommentBox = ({
   handleSubmit,
@@ -13,17 +15,28 @@ const CommentBox = ({
   initialText = ""
 }) => {
 
-  const [text, setText] = useState(initialText);
-  const isTextareaDisabled = text.length === 0;
+  const { _id } = useParams();
 
-  const onSubmit = (event) => {
+  const initialValue = {
+    productId: _id,
+    comment: ''
+  };
+
+  const dispatch = useDispatch();
+  const [postComment, setPostComment] = useState(initialValue);
+  const isTextareaDisabled = postComment?.comment?.length === 0;
+
+  const handleOnChange = (e) => {
+    setPostComment({ ...postComment, comment: e.target.value });
+  };
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    handleSubmit(text);
-    setText("");
+    await dispatch(AddCommentRequest(postComment));
   };
 
   const enableCommentButton = () => {
-    return (!text);
+    return (!postComment?.comment);
   };
 
   return (
@@ -34,8 +47,8 @@ const CommentBox = ({
             showCount
             maxLength={200}
             className="text-area"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={postComment.comment}
+            onChange={handleOnChange}
             placeholder="Add a comment..."
           />
 

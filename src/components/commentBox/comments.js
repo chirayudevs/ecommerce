@@ -9,11 +9,15 @@ import {
   updateComment as updateCommentApi,
   deleteComment as deleteCommentApi,
 } from "./commentsApi";
-import { CommentsRequest } from '../../redux/comments/actions';
+import {AddCommentRequest, CommentsRequest} from '../../redux/comments/actions';
 import {RequestProduct} from "../../redux/selectProduct/actions";
 import {Avatar, Card} from "antd";
 import CommentBox from "./commentBox";
 import './comment.scss';
+
+const initialValue = {
+  comment: ''
+}
 
 const Comments = ({
   currentUserId,
@@ -30,6 +34,8 @@ const Comments = ({
   const dispatch = useDispatch();
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
+  const [postComment, setPostComment] = useState(initialValue);
+  const [selectedValue, setSelectedValue] = useState('')
   const comments = useSelector(state => state.singleProduct.getProduct.comment);
  /* const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
@@ -38,6 +44,14 @@ const Comments = ({
   debugger
 
   console.log('comments on comments page', comments);
+
+  const addNewComment = async (e) => {
+    setSelectedValue(e.target.value);
+    setPostComment({...postComment, comment: e.target.value});
+
+    console.log('comment add')
+    await dispatch(AddCommentRequest(postComment));
+  };
 
   const getReplies = (commentId) =>
     backendComments
@@ -119,7 +133,7 @@ const Comments = ({
     <div className="comments">
       <h3 className="comments-title">Product Reviews</h3>
       <div className="comment-form-title">Write comment</div>
-      <CommentForm submitLabel="Write" handleSubmit={addComment} />
+      <CommentForm submitLabel="Write" handleSubmit={addNewComment} />
       <div className="comments-container">
 
         <div>
