@@ -9,40 +9,68 @@ import {
   updateComment as updateCommentApi,
   deleteComment as deleteCommentApi,
 } from "./commentsApi";
-import {AddCommentRequest, CommentsRequest} from '../../redux/comments/actions';
+import {AddCommentRequest, CommentsRequest, EditCommentRequest} from '../../redux/comments/actions';
 import {RequestProduct} from "../../redux/selectProduct/actions";
 import {Avatar, Card} from "antd";
 import CommentBox from "./commentBox";
 import './comment.scss';
 
+/*
 const initialValue = {
   comment: ''
 }
+*/
 
 const Comments = ({
   currentUserId,
-  comment,
+  //comment,
   replies,
   /*setActiveComment,*/
   /*activeComment,*/
-  updateComment,
+  /*updateComment,*/
   deleteComment,
   addComment,
   parentId = null,
 }) => {
+  const { _id } = useParams();
+
+  const initialValue = {
+    productId: _id,
+    comment: ''
+  };
+
+  const initialComment = {
+    comment: ''
+  }
 
   const dispatch = useDispatch();
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const [postComment, setPostComment] = useState(initialValue);
+  const [editComment, setEditComment] = useState(initialComment);
   const [selectedValue, setSelectedValue] = useState('')
   const comments = useSelector(state => state.singleProduct.getProduct.comment);
  /* const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
   );*/
-  const { _id } = useParams();
-  debugger
 
+  //const { _id } = useParams();
+
+  //const dispatch = useDispatch();
+  //const [postComment, setPostComment] = useState(initialValue);
+  const isTextareaDisabled = postComment?.comment?.length === 0;
+
+  const handleOnChange = (e) => {
+    setPostComment({ ...postComment, comment: e.target.value });
+  };
+
+  const onSubmit = async (event) => {
+    console.log('submit comment')
+    event.preventDefault();
+    await dispatch(AddCommentRequest(postComment));
+  };
+
+  console.log('comment', postComment)
   console.log('comments on comments page', comments);
 
   const addNewComment = async (e) => {
@@ -53,13 +81,13 @@ const Comments = ({
     await dispatch(AddCommentRequest(postComment));
   };
 
-  const getReplies = (commentId) =>
+  /*const getReplies = (commentId) =>
     backendComments
       .filter((backendComment) => backendComment.parentId === commentId)
       .sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      );
+      );*/
 
   /*const addComment = (text, parentId) => {
     createCommentApi(text, parentId).then((comment) => {
@@ -67,9 +95,19 @@ const Comments = ({
       setActiveComment(null);
       console.log('comment')
     });
+  }; */
+
+  const updateCommentOnChange = (e) => {
+    setEditComment({ ...editComment, comment: e.target.value});
   };
 
-  const updateComment = (text, commentId) => {
+  console.log('edit comment', editComment)
+  const updateComment = async (event) => {
+    event.preventDefault();
+    dispatch(EditCommentRequest(editComment))
+  }
+
+  /*const updateComment = (text, commentId) => {
     updateCommentApi(text).then(() => {
       const updatedBackendComments = backendComments.map((backendComment) => {
         if (backendComment.id === commentId) {
@@ -80,9 +118,9 @@ const Comments = ({
       setBackendComments(updatedBackendComments);
       setActiveComment(null);
     });
-  };
+  };*/
 
-  const deleteComment = (commentId) => {
+  /*const deleteComment = (commentId) => {
     if (window.confirm("Are you sure you want to remove comment?")) {
       deleteCommentApi().then(() => {
         const updatedBackendComments = backendComments.filter(
@@ -111,12 +149,11 @@ const Comments = ({
     activeComment &&
     activeComment.id === comment.id &&
     activeComment.type === "editing";
-
-  const isReplying =
+*/
+  /*const isReplying =
     activeComment &&
     activeComment.id === comment.id &&
-    activeComment.type === "replying";
-*/
+    activeComment.type === "replying";*/
 
 /*
   const fiveMinutes = 300000;
@@ -129,11 +166,19 @@ const Comments = ({
   const createdAt = new Date(comment.createdAt).toLocaleDateString();
 */
 
+  //const canEdit = currentUserId === comment.userId;
+
   return (
     <div className="comments">
       <h3 className="comments-title">Product Reviews</h3>
       <div className="comment-form-title">Write comment</div>
-      <CommentForm submitLabel="Write" handleSubmit={addNewComment} />
+      <CommentForm
+        submitLabel="Write"
+        isTextareaDisabled={isTextareaDisabled}
+        value={postComment.comment}
+        handleOnChange={handleOnChange}
+        handleSubmit={onSubmit}
+      />
       <div className="comments-container">
 
         <div>
@@ -145,32 +190,36 @@ const Comments = ({
               </div>
               <div className="comment-right-part">
                 <div className="comment-content">
-                  <div className="comment-author"> Test user name</div>
-                  <div>createdAt</div>
+                  <div className="comment-author"> Test user name {comment._id}</div>
                 </div>
                 { <div className="comment-text">{comment.comment}</div>}
                 {
-                  <CommentBox
-                    submitLabel="Update"
-                    hasCancelButton
-                    initialText={comment.comment}
-                    /*handleSubmit={(text) => updateComment(text, comment._id)}*/
-                    handleCancel={() => {
-                      setActiveComment(null);
-                    }}
-                  />
+                  <div >
+                    <CommentBox
+                      submitLabel="Update"
+                      hasCancelButton
+                      initialText={comment.comment}
+                      value={editComment.comment}
+                      handleOnChange={updateCommentOnChange}
+                      handleSubmit={updateComment}
+                      /*handleSubmit={(text) => updateComment(text, comment._id)}*/
+                      handleCancel={() => {
+                        setActiveComment(null);
+                      }}
+                    />
+                  </div>
                 }
                 <div className="comment-actions">
-                  {/*{canReply && (
+                  {
                     <div
                       className="comment-action"
                       onClick={() =>
-                        setActiveComment({ id: comment.id, type: "replying" })
+                        setActiveComment({ id: comment._id, type: "replying" })
                       }
                     >
                       Reply
                     </div>
-                  )}*/}
+                  }
                   {/*{canEdit && (
                     <div
                       className="comment-action"

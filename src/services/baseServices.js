@@ -10,3 +10,7 @@ export const Get = (url, config) => {
 export const Post = (url, data, config) => {
   return axios.post(APP_BASE_URL + url, data, config);
 };
+
+export const Put = (url, data, config) => {
+  return axios.put(APP_BASE_URL + url, data, config);
+};

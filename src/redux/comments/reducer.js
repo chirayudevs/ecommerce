@@ -3,12 +3,13 @@ import {
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_ERROR,
   ADD_COMMENT_REQUEST,
-  ADD_COMMENT_SUCCESS, ADD_COMMENT_ERROR
+  ADD_COMMENT_SUCCESS, ADD_COMMENT_ERROR, EDIT_COMMENT_REQUEST, EDIT_COMMENT_SUCCESS, EDIT_COMMENT_ERROR
 } from "./actionTypes";
 
 const initialState = {
   allComments:  [],
-  addComment: []
+  addComment: [],
+  editComment: []
 };
 
 /*Get all comments*/
@@ -53,6 +54,31 @@ export const AddCommentReducer = (state = initialState, { type, payload }) => {
       }
 
     case ADD_COMMENT_ERROR:
+      return {
+        ...state,
+      }
+
+    default:
+      return state
+  }
+};
+
+/*Edit comment*/
+
+export const EditCommentReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case EDIT_COMMENT_REQUEST:
+      return {
+        ...state,
+      }
+
+    case EDIT_COMMENT_SUCCESS:
+      return {
+        ...state,
+        editComment: payload.data
+      }
+
+    case EDIT_COMMENT_ERROR:
       return {
         ...state,
       }

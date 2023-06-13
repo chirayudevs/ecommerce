@@ -4,9 +4,9 @@ import {
   FETCH_COMMENTS_ERROR,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_ERROR
+  ADD_COMMENT_ERROR, EDIT_COMMENT_REQUEST, EDIT_COMMENT_SUCCESS
 } from './actionTypes';
-import { Get, Post } from '../../services/baseServices';
+import {Get, Post, Put} from '../../services/baseServices';
 
 const config = {
   headers: {
@@ -40,6 +40,21 @@ export const AddCommentRequest = (params) => {
     await Post('comment', params, config).then((response) =>
       dispatch({
         type: ADD_COMMENT_REQUEST,
+        payload: response.data
+      })
+    )
+  }
+};
+
+/*Edit comment*/
+
+export const EditCommentRequest = (params) => {
+  return async (dispatch) => {
+    dispatch({type: EDIT_COMMENT_REQUEST});
+
+    await Put('comment', params, config).then((response) =>
+      dispatch({
+        type: EDIT_COMMENT_SUCCESS,
         payload: response.data
       })
     )

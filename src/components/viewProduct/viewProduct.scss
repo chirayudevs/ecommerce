@@ -18,6 +18,12 @@
   margin: 10px;
 }
 
+.product-description-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .product-description-wrapper {
   display: grid;
   height: 100px;

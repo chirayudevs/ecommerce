@@ -11,6 +11,9 @@ const CommentBox = ({
   handleSubmit,
   submitLabel,
   hasCancelButton = false,
+  handleOnChange,
+  value,
+  isTextareaDisabled,
   handleCancel,
   initialText = ""
 }) => {
@@ -24,11 +27,11 @@ const CommentBox = ({
 
   const dispatch = useDispatch();
   const [postComment, setPostComment] = useState(initialValue);
-  const isTextareaDisabled = postComment?.comment?.length === 0;
+  //const isTextareaDisabled = postComment?.comment?.length === 0;
 
-  const handleOnChange = (e) => {
+  /*const handleOnChange = (e) => {
     setPostComment({ ...postComment, comment: e.target.value });
-  };
+  };*/
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -41,13 +44,13 @@ const CommentBox = ({
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="comment-box-main">
           <TextArea
             showCount
             maxLength={200}
             className="text-area"
-            value={postComment.comment}
+            value={value || initialText}
             onChange={handleOnChange}
             placeholder="Add a comment..."
           />
@@ -59,7 +62,7 @@ const CommentBox = ({
             <button
               type="button"
               className="comment-form-button comment-form-cancel-button"
-              onClick={onSubmit}
+              //onClick={onSubmit}
             >
               Cancel
             </button>

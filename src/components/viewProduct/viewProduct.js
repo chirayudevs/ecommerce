@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Breadcrumb, Layout, theme } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Breadcrumb, Layout, Modal, theme } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { RequestProduct } from '../../redux/selectProduct/actions';
@@ -12,6 +12,9 @@ const ViewProduct = (props) => {
 
   const { commentLine } = props;
   const dispatch = useDispatch();
+  const [isEditing, setIsEditing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [product, setProduct] = useState([]);
   const singleProduct = useSelector(state => state.singleProduct.getProduct);
   const comments = useSelector(state => state.singleProduct.getProduct.comment);
 
@@ -23,8 +26,27 @@ const ViewProduct = (props) => {
   console.log('commentLine ---', commentLine);
 
   useEffect(() => {
-    dispatch(RequestProduct(_id))
-  }, [dispatch])
+    dispatch(RequestProduct(_id));
+  }, [dispatch]);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleEditProductClick = (product) => {
+    setIsEditing(true);
+
+    setProduct({...product})
+    console.log('edit product', product);
+  };
 
   const {
     token: { colorBgContainer },
@@ -32,6 +54,35 @@ const ViewProduct = (props) => {
 
   return (
     <div>
+      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <div>
+          <div>
+            <label>Category</label>
+            <input
+              type="text"
+              value={singleProduct?.product?.category}
+              name="category"
+            />
+          </div>
+          <div>
+            <label>Description</label>
+            <input
+              type="text"
+              value={singleProduct?.product?.description}
+              name="description"
+            />
+          </div>
+          <div>
+            <label>Image</label>
+            <img
+              src={singleProduct?.product?.image}
+              alt='test'
+              className='product-image-container'
+            />
+          </div>
+        </div>
+      </Modal>
+
       <Layout>
         <Header className="view-product-header">
           <div className="demo-logo" />
@@ -75,12 +126,20 @@ const ViewProduct = (props) => {
                 top: '20px'
               }}
             >
-              <div className="product-description-wrapper">
-                <div className="description-header">
-                  {singleProduct?.product?.category}
+              <div className="product-description-main">
+                <div className="product-description-wrapper">
+                  <div className="description-header">
+                    {singleProduct?.product?.category}
+                  </div>
+                  <div>
+                    {singleProduct?.product?.description}
+                  </div>
                 </div>
                 <div>
-                  {singleProduct?.product?.description}
+                  {
+
+                    <button onClick={showModal}>Edit Product</button>
+                  }
                 </div>
               </div>
             </Content>

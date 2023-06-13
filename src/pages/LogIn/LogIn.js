@@ -42,7 +42,6 @@ const LogIn = () => {
   const onFinish = () => {
     console.log('user email', login?.user?.email);
 
-    debugger
     //const userData = login
 
   /*  if(!(user.email || user.password)) {
