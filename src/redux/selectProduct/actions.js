@@ -2,9 +2,9 @@ import {
   FETCH_SINGLE_PRODUCT_REQUEST,
   FETCH_SINGLE_PRODUCT_SUCCESS,
   FETCH_SINGLE_PRODUCT_ERROR,
-  EDIT_PRODUCT_REQUEST, EDIT_PRODUCT_SUCCESS
+  EDIT_PRODUCT_REQUEST, EDIT_PRODUCT_SUCCESS, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS
 } from './actionTypes';
-import { Get, Put } from '../../services/baseServices';
+import {Delete, Get, Put} from '../../services/baseServices';
 
 /*View product*/
 export const RequestProduct = (_id) => {
@@ -31,7 +31,7 @@ export const RequestProduct = (_id) => {
 };
 
 /*Edit product*/
-export const EditProductRequest = () => {
+export const EditProductRequest = (_id, params) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -41,10 +41,31 @@ export const EditProductRequest = () => {
 
   return async (dispatch) => {
     dispatch({type: EDIT_PRODUCT_REQUEST});
-
-    await Put(`product/`, config).then((response) =>
+    await Put(`product/${_id}`, params, config).then((response) =>
       dispatch({
         type: EDIT_PRODUCT_SUCCESS,
+        payload: response.data
+      })
+    ).catch((error) =>
+      console.log(error)
+    )
+  }
+};
+
+/*Delete product*/
+export const DeleteProductRequest = (_id) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': JSON.parse(localStorage.getItem('user'))
+    }
+  };
+
+  return async (dispatch) => {
+    dispatch({type: DELETE_PRODUCT_REQUEST});
+    await Delete(`product/${_id}`, config).then((response) =>
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS,
         payload: response.data
       })
     ).catch((error) =>

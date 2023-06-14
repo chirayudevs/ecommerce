@@ -62,33 +62,32 @@ const LogIn = () => {
     <>
       {contextHolder}
       <div className="login-main">
-      <div className="login-wrapper">
-        <Card className="card-wrapper">
-          <form className="form-wrapper">
-            <div>
-              <label> Email </label>
-              <input type="email" name="email" title="email" onChange={onChangeHandler} required={true}/>
-            </div>
+        <div className="login-wrapper">
+          <Card className="card-wrapper">
+            <form className="form-wrapper">
+              <div>
+                <label> Email </label>
+                <input type="email" name="email" title="email" onChange={onChangeHandler} required={true}/>
+              </div>
 
-            <div>
-              <label> Password </label>
-              <input type="password" name="password" title="password" onChange={onChangeHandler} required={true}/>
-            </div>
+              <div>
+                <label> Password </label>
+                <input type="password" name="password" title="password" onChange={onChangeHandler} required={true}/>
+              </div>
 
-            <div className="login-button">
-              <Button
-                variant="success"
-                onClick={() => onFinish()}
-              >
-                Log In
-              </Button>
-            </div>
-          </form>
-        </Card>
+              <div className="login-button">
+                <Button
+                  variant="success"
+                  onClick={() => onFinish()}
+                >
+                  Log In
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
       </div>
-
-      </div>
-          </>
+    </>
   )
 };
 

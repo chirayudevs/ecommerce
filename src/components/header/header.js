@@ -54,10 +54,10 @@ const Header = () => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file)
       setProduct({...product, image: base64})
+
+      document.getElementById('images').src = window.URL.createObjectURL(file);
     }
   }
-
-  console.log('selectedFile product', product);
 
   return (
     <header className="header-main">
@@ -93,6 +93,7 @@ const Header = () => {
 
             <div>
               <label> Image </label>
+              <img id="images" alt="uploaded image" height="100" width="100"/>
               <input type="file" name="image" title="image" accept="image/*" onChange={onChangeHandler}/>
             </div>
           </form>

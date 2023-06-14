@@ -48,11 +48,11 @@ export const AddCommentRequest = (params) => {
 
 /*Edit comment*/
 
-export const EditCommentRequest = (params) => {
+export const EditCommentRequest = (_id, params) => {
   return async (dispatch) => {
     dispatch({type: EDIT_COMMENT_REQUEST});
 
-    await Put('comment', params, config).then((response) =>
+    await Put(`comment/${_id}`, params, config).then((response) =>
       dispatch({
         type: EDIT_COMMENT_SUCCESS,
         payload: response.data

@@ -13,7 +13,6 @@ const initialState = {
 };
 
 export const VerifyEmailReducer = (state = initialState, { type, payload }) => {
-  console.log('payload verification', payload)
   switch (type) {
     case VERIFY_EMAIL_REQUEST:
       return {

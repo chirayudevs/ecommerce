@@ -104,7 +104,11 @@ const Comments = ({
   console.log('edit comment', editComment)
   const updateComment = async (event) => {
     event.preventDefault();
-    dispatch(EditCommentRequest(editComment))
+    comments?.length && comments?.map(i => {
+      dispatch(EditCommentRequest(i._id, editComment))
+
+    })
+
   }
 
   /*const updateComment = (text, commentId) => {

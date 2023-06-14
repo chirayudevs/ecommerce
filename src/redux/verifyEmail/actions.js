@@ -9,7 +9,6 @@ import {
 } from './actionTypes';
 
 export const VerifyEmailAction = (params) => {
-  console.log('fetch user action', params);
 
   return async (dispatch) => {
 

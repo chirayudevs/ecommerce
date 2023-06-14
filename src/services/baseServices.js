@@ -14,3 +14,7 @@ export const Post = (url, data, config) => {
 export const Put = (url, data, config) => {
   return axios.put(APP_BASE_URL + url, data, config);
 };
+
+export const Delete = (url, config) => {
+  return axios.delete(APP_BASE_URL + url, config);
+}

@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export const SignUpReducer = (state = initialState, { type, payload }) => {
-  console.log('payload signup', payload)
   switch (type) {
     case REGISTER_USER_DATA_REQUEST:
       return {

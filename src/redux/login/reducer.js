@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export const LogInReducer = (state = initialState, { type, payload }) => {
-  console.log('Payload on login reducer', payload)
   switch(type) {
     case LOGIN_REQUEST:
       return {

@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export const ProductsReducer = (state = initialState, { type, payload }) => {
-  console.log('products payload', payload)
   switch (type) {
     case GET_PRODUCTS_REQUEST:
       return {
