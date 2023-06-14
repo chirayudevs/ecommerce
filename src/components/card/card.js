@@ -20,7 +20,7 @@ const ProductCard = () => {
   useEffect(() => {
     dispatch(FetchProducts());
     window.addEventListener("scroll", handleScroll);
-  }, []);
+  }, [dispatch]);
 
   const handleScroll = () => {
     if(
@@ -55,7 +55,7 @@ const ProductCard = () => {
       {loader ?
         <SkeletonLoader/> :
         allProducts.length > 0 && allProducts.map(product => (
-          <div key={product._id} className="card-main">
+          <div className="card-main">
             <Card
               style={{
                 width: 300,

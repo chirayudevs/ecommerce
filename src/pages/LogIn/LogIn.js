@@ -21,8 +21,6 @@ const LogIn = () => {
   const [messageApi, contextHolder] = message.useMessage();
   console.log('login', login?.data?.accessToken?.accessToken);
 
-  const loginToken = login?.data?.accessToken?.accessToken;
-
   const onChangeHandler = (e) => {
 
     setSelectedValue(e.target.value);

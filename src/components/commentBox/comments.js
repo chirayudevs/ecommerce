@@ -106,10 +106,8 @@ const Comments = ({
     event.preventDefault();
     comments?.length && comments?.map(i => {
       dispatch(EditCommentRequest(i._id, editComment))
-
     })
-
-  }
+  };
 
   /*const updateComment = (text, commentId) => {
     updateCommentApi(text).then(() => {
@@ -135,10 +133,12 @@ const Comments = ({
     }
   };*/
 
+/*
   useEffect(() => {
     console.log('use effect comments')
     dispatch(RequestProduct(_id))
   }, [dispatch]);
+*/
 
 /*
   useEffect(() => {
@@ -198,7 +198,7 @@ const Comments = ({
                 </div>
                 { <div className="comment-text">{comment.comment}</div>}
                 {
-                  <div >
+                  <div>
                     <CommentBox
                       submitLabel="Update"
                       hasCancelButton

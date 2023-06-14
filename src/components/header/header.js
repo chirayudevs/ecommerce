@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SearchOutlined } from '@ant-design/icons';
 import { AddProductAction } from '../../redux/addProduct/actions';
 import './header.scss';
 
-const Header = () => {
+const Header = (userName) => {
 
   const initialValues = {
     name: '',
@@ -18,6 +19,9 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [product, setProduct] = useState(initialValues);
+  const login = useSelector(state => state.logIn.login);
+  const user = login?.data?.user?.username[0];
+  console.log('login', login)
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -30,7 +34,7 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
-  const convertToBase64 = (file) => {
+    const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -57,12 +61,18 @@ const Header = () => {
 
       document.getElementById('images').src = window.URL.createObjectURL(file);
     }
-  }
+  };
 
   return (
     <header className="header-main">
       <div className="header-left-side">
         E-commerce Store
+      </div>
+      <div>
+        <input type="text"/>
+        <Button ghost={true}>
+          <SearchOutlined />
+        </Button>
       </div>
       <div className="header-right-side">
         <Button ghost={true} onClick={showModal}>
@@ -99,6 +109,7 @@ const Header = () => {
           </form>
         </Modal>
         <span className="profileImage">
+          { user }
         </span>
       </div>
     </header>

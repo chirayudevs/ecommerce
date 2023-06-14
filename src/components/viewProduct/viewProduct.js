@@ -38,7 +38,7 @@ const ViewProduct = (props) => {
 
   console.log('commentLine ---', commentLine);
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(RequestProduct(_id));
   }, [dispatch]);
 
@@ -46,8 +46,10 @@ const ViewProduct = (props) => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
+  const handleOk = async (event) => {
+    event.preventDefault();
     dispatch(EditProductRequest(product._id, product));
+    console.log('product', product)
     setIsModalOpen(false);
   };
 
@@ -131,7 +133,7 @@ const ViewProduct = (props) => {
               onChange={onChangeHandler}
             />
           </div>
-          <div>
+          {/*<div>
             <label>Image</label>
             <img
               id = "updatedImage"
@@ -142,7 +144,7 @@ const ViewProduct = (props) => {
               width="100"
             />
             <input type="file" name="image" title="image" accept="image/*" onChange={onChangeHandler}/>
-          </div>
+          </div>*/}
         </div>
       </Modal>
 
