@@ -4,7 +4,7 @@ import { SignUpReducer } from './signUp/reducer';
 import { ResendEmailReducer, VerifyEmailReducer } from './verifyEmail/reducer';
 import { DeleteProductReducer, EditProductReducer, SingleProductReducer } from './selectProduct/reducer';
 import { LogInReducer } from './login/reducer';
-import { AddCommentReducer, CommentReducer, EditCommentReducer } from './comments/reducer';
+import { AddCommentReducer, CommentReducer, DeleteCommentReducer, EditCommentReducer } from './comments/reducer';
 import { AddProductReducer } from './addProduct/reducer';
 
 export const Reducers = combineReducers({
@@ -19,5 +19,6 @@ export const Reducers = combineReducers({
   addComment: AddCommentReducer,
   editComment: EditCommentReducer,
   editProduct: EditProductReducer,
-  deleteProduct: DeleteProductReducer
+  deleteProduct: DeleteProductReducer,
+  deleteComment: DeleteCommentReducer
 });

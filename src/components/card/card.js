@@ -61,11 +61,13 @@ const ProductCard = () => {
                 width: 300,
               }}
               cover={
-                <img
-                  alt="example"
-                  src={product.image}
-                  className="card-image"
-                />
+                <>
+                  <img
+                    alt="example"
+                    src={product.image}
+                    className="card-image"
+                  />
+                </>
               }
               extra={<NavLink to={`/viewProduct/${product._id}`}>View</NavLink>}
             >
@@ -73,6 +75,7 @@ const ProductCard = () => {
                 title={product.name}
                 description={product.description}
               />
+              <div> sdfsdf </div>
             </Card>
           </div>
         ))

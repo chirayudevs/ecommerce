@@ -4,9 +4,9 @@ import {
   FETCH_COMMENTS_ERROR,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_ERROR, EDIT_COMMENT_REQUEST, EDIT_COMMENT_SUCCESS
+  ADD_COMMENT_ERROR, EDIT_COMMENT_REQUEST, EDIT_COMMENT_SUCCESS, DELETE_COMMENT_REQUEST
 } from './actionTypes';
-import {Get, Post, Put} from '../../services/baseServices';
+import {Delete, Get, Post, Put} from '../../services/baseServices';
 
 const config = {
   headers: {
@@ -53,6 +53,22 @@ export const EditCommentRequest = (_id, params) => {
     dispatch({type: EDIT_COMMENT_REQUEST});
 
     await Put(`comment/${_id}`, params, config).then((response) =>
+      dispatch({
+        type: EDIT_COMMENT_SUCCESS,
+        payload: response.data
+      })
+    )
+  }
+};
+
+/*Delete comment*/
+
+export const DeleteCommentRequest = (_id) => {
+
+  return async (dispatch) => {
+    dispatch({type: DELETE_COMMENT_REQUEST});
+
+    await Delete(`comment/${_id}`, config).then((response) =>
       dispatch({
         type: EDIT_COMMENT_SUCCESS,
         payload: response.data

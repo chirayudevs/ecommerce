@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Avatar, Card } from 'antd';
 import CommentForm from "./commentForm";
-import {EditCommentRequest} from "../../redux/comments/actions";
+import {DeleteCommentRequest, EditCommentRequest} from "../../redux/comments/actions";
+import {DeleteCommentReducer} from "../../redux/comments/reducer";
 
 const CommentNew = ({
                    comment,
@@ -10,7 +12,7 @@ const CommentNew = ({
                    setActiveComment,
                    activeComment,
                    /*updateComment,*/
-                   deleteComment,
+                   /*deleteComment,*/
                    addComment,
                    parentId = null,
                    currentUserId,
@@ -40,6 +42,7 @@ const CommentNew = ({
   const comments = useSelector(state => state.singleProduct.getProduct.comment);
   const [editComment, setEditComment] = useState(initialComment);
   const dispatch = useDispatch();
+  const { _id } = useParams();
 
   const updateComment = async (e, commentId) => {
 
@@ -57,6 +60,10 @@ const CommentNew = ({
   };
   console.log('editComment', editComment)
 
+  const deleteComment = () => {
+    console.log('delete test')
+    dispatch(DeleteCommentRequest(_id))
+  };
 
   return (
     /*<div key={comment.id} className="comment">*/
@@ -107,14 +114,14 @@ const CommentNew = ({
                   Edit
                 </div>
               )}
-              {canDelete && (
+              {/*{canDelete && (*/}
                 <div
                   className="comment-action"
-                  onClick={() => deleteComment(comment.id)}
+                  onClick={deleteComment}
                 >
                   Delete
                 </div>
-              )}
+              {/*)}*/}
             </div>
             {isReplying && (
               <CommentForm
