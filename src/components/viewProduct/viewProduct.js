@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DeleteProductRequest, EditProductRequest, RequestProduct } from '../../redux/selectProduct/actions';
 import Comments from "../commentBox/comments";
 import './viewProduct.scss';
+import CommentsNew from "../commentBox/commentsNew";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -221,7 +222,7 @@ const ViewProduct = (props) => {
             textAlign: 'left',
           }}
         >
-          <Comments
+          <CommentsNew
             currentUserId="1"
           />
           {commentLine}

@@ -102,10 +102,18 @@ const Comments = ({
   };
 
   console.log('edit comment', editComment)
-  const updateComment = async (event) => {
-    event.preventDefault();
+  const updateComment = async (e, commentId) => {
+    console.log('test')
+    e.preventDefault();
+    console.log('comment Id', commentId)
+    /*event.preventDefault();*/
     comments?.length && comments?.map(i => {
-      dispatch(EditCommentRequest(i._id, editComment))
+      if(i._id === commentId) {
+        return ([
+          { ...editComment, comment: e.target.value},
+            dispatch(EditCommentRequest(i._id, editComment)),
+          ]);
+      }
     })
   };
 
@@ -204,8 +212,9 @@ const Comments = ({
                       hasCancelButton
                       initialText={comment.comment}
                       value={editComment.comment}
-                      handleOnChange={updateCommentOnChange}
-                      handleSubmit={updateComment}
+                      /*handleOnChange={updateCommentOnChange}*/
+                      handleOnChange={(e) => setEditComment({comment: e.target.value})}
+                      handleSubmit={(e) => updateComment(e, comment._id)}
                       /*handleSubmit={(text) => updateComment(text, comment._id)}*/
                       handleCancel={() => {
                         setActiveComment(null);
