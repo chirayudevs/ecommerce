@@ -73,7 +73,7 @@ const CommentsNew = ({ currentUserId }) => {
     });
   };*/
 
-  const deleteComment = (commentId) => {
+  /*const deleteComment = (commentId) => {
     if (window.confirm("Are you sure you want to remove comment?")) {
       deleteCommentApi().then(() => {
         const updatedBackendComments = backendComments.filter(
@@ -82,7 +82,7 @@ const CommentsNew = ({ currentUserId }) => {
         setBackendComments(updatedBackendComments);
       });
     }
-  };
+  };*/
 
   useEffect(() => {
     getCommentsApi().then((data) => {
@@ -147,7 +147,7 @@ const CommentsNew = ({ currentUserId }) => {
             activeComment={activeComment}
             setActiveComment={setActiveComment}
             addComment={AddComment}
-            deleteComment={deleteComment}
+            /*deleteComment={deleteComment}*/
             /*updateComment={(e) => updateComment(e, rootComment._id)}*/
             currentUserId={currentUserId}
           />

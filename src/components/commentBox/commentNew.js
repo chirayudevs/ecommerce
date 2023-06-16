@@ -43,7 +43,7 @@ const CommentNew = ({
   const [editComment, setEditComment] = useState(initialComment);
   const dispatch = useDispatch();
   const { _id } = useParams();
-
+  console.log('id >>', _id)
   const updateComment = async (e, commentId) => {
 
     e.preventDefault();
@@ -60,9 +60,15 @@ const CommentNew = ({
   };
   console.log('editComment', editComment)
 
-  const deleteComment = () => {
+  const deleteComment = (commentId) => {
     console.log('delete test')
-    dispatch(DeleteCommentRequest(_id))
+    comments?.length && comments?.filter(i => {
+      if(i._id !== commentId) {
+        return (
+          dispatch(DeleteCommentRequest(i._id, _id))
+        )
+      }
+    })
   };
 
   return (

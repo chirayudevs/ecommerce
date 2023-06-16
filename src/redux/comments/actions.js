@@ -63,12 +63,12 @@ export const EditCommentRequest = (_id, params) => {
 
 /*Delete comment*/
 
-export const DeleteCommentRequest = (_id) => {
+export const DeleteCommentRequest = (id,_id) => {
 
   return async (dispatch) => {
     dispatch({type: DELETE_COMMENT_REQUEST});
 
-    await Delete(`comment/${_id}`, config).then((response) =>
+    await Delete(`comment/${id}/${_id}`, config).then((response) =>
       dispatch({
         type: EDIT_COMMENT_SUCCESS,
         payload: response.data

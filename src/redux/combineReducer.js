@@ -6,6 +6,7 @@ import { DeleteProductReducer, EditProductReducer, SingleProductReducer } from '
 import { LogInReducer } from './login/reducer';
 import { AddCommentReducer, CommentReducer, DeleteCommentReducer, EditCommentReducer } from './comments/reducer';
 import { AddProductReducer } from './addProduct/reducer';
+import { OrdersReducer } from './orders/reducer';
 
 export const Reducers = combineReducers({
   products: ProductsReducer,
@@ -20,5 +21,6 @@ export const Reducers = combineReducers({
   editComment: EditCommentReducer,
   editProduct: EditProductReducer,
   deleteProduct: DeleteProductReducer,
-  deleteComment: DeleteCommentReducer
+  deleteComment: DeleteCommentReducer,
+  orders: OrdersReducer,
 });
