@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Breadcrumb, Layout, Modal, theme } from 'antd';
+import {Breadcrumb, Button, Layout, Modal, theme} from 'antd';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteProductRequest, EditProductRequest, RequestProduct } from '../../redux/selectProduct/actions';
@@ -17,12 +17,16 @@ const initialValues = {
   image: ''
 };
 
+
+
 const ViewProduct = (props) => {
 
   const { commentLine } = props;
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addProductModal, setAddProductModal] = useState(false);
+  const [productCount, setProductCount] = useState(0);
   const singleProduct = useSelector(state => state.singleProduct.getProduct);
   const [selectedValue, setSelectedValue] = useState('');
   const [product, setProduct] = useState(singleProduct?.product);
@@ -45,6 +49,22 @@ const ViewProduct = (props) => {
 
   const showModal = () => {
     setIsModalOpen(true);
+  };
+
+  const showAddProductModal = () => {
+    setAddProductModal(true);
+  };
+
+  const handleClickOk = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickOnCancel = () => {
+    setAddProductModal(false);
+  };
+
+  const handleProductCounter = () => {
+
   };
 
   const handleOk = async (event) => {
@@ -98,6 +118,16 @@ const ViewProduct = (props) => {
     console.log('edit product', product);
   };
 
+  const handleIncrement = () => {
+    setProductCount(productCount + 1);
+  };
+
+  const handleDecrement = () => {
+    if(productCount > 0) {
+      setProductCount(productCount - 1);
+    }
+  };
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -146,6 +176,15 @@ const ViewProduct = (props) => {
             />
             <input type="file" name="image" title="image" accept="image/*" onChange={onChangeHandler}/>
           </div>*/}
+        </div>
+      </Modal>
+
+      <Modal open={addProductModal} onOk={handleClickOk} onCancel={handleClickOnCancel}>
+        <div key={singleProduct?.product?._id}>
+          Add to cart:
+          <Button type="primary" shape="circle" onClick={handleDecrement}>-</Button>
+            {productCount}
+          <Button type="primary" shape="circle" onClick={handleIncrement}>+</Button>
         </div>
       </Modal>
 
@@ -211,6 +250,12 @@ const ViewProduct = (props) => {
                   {
 
                     <button onClick={handleClickOnDelete}>Delete Product</button>
+                  }
+                </div>
+                <div>
+                  {
+
+                    <button onClick={showAddProductModal}>Add Product</button>
                   }
                 </div>
               </div>

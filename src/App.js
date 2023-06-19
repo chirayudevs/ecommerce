@@ -19,7 +19,6 @@ const App = () => {
         <Route path='/' element={<LogIn />} />
         <Route path='/orders' element={<OrdersPage />} />
       </Routes>
-    
   );
 }
 
