@@ -101,7 +101,6 @@ const ViewProduct = (props) => {
       const file = e.target.files[0];
       const base64 = await convertToBase64(file)
       setProduct({...product, image: base64})
-      console.log('edit', product)
       document.getElementById('updatedImage').src = window.URL.createObjectURL(file);
     }
   };
@@ -114,7 +113,6 @@ const ViewProduct = (props) => {
     setIsEditing(true);
 
     setProduct({...product})
-    console.log('edit product', product);
   };
 
   const handleIncrement = () => {

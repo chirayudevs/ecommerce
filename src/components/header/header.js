@@ -5,7 +5,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { AddProductAction } from '../../redux/addProduct/actions';
 import './header.scss';
 
-const Header = (userName) => {
+const Header = () => {
 
   const initialValues = {
     name: '',
@@ -21,7 +21,6 @@ const Header = (userName) => {
   const [product, setProduct] = useState(initialValues);
   const login = useSelector(state => state.logIn.login);
   const user = login?.data?.user?.username[0];
-  console.log('login', login)
 
   const showModal = () => {
     setIsModalOpen(true);
