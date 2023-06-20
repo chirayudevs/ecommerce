@@ -3,45 +3,38 @@ import {Breadcrumb, Button, Layout, Modal, theme} from 'antd';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteProductRequest, EditProductRequest, RequestProduct } from '../../redux/selectProduct/actions';
-import Comments from "../commentBox/comments";
 import './viewProduct.scss';
 import CommentsNew from "../commentBox/commentsNew";
+import { AddOrderToCartRequest } from "../../redux/orders/actions";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const initialValues = {
-  name: '',
-  category: '',
-  price: '',
-  description: '',
-  image: ''
-};
-
-
-
 const ViewProduct = (props) => {
+
+  const { _id } = useParams();
+  const [productCount, setProductCount] = useState(0);
+
+  const initialValue = {
+    product : [{
+      productId: _id,
+      quantity: productCount
+    }]
+  };
 
   const { commentLine } = props;
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addProductModal, setAddProductModal] = useState(false);
-  const [productCount, setProductCount] = useState(0);
   const singleProduct = useSelector(state => state.singleProduct.getProduct);
   const [selectedValue, setSelectedValue] = useState('');
   const [product, setProduct] = useState(singleProduct?.product);
   const comments = useSelector(state => state.singleProduct.getProduct.comment);
+  const [addToCart, setAddToCart] = useState(initialValue);
 
   useEffect(() => {
     setProduct(singleProduct?.product)
-  }, [singleProduct.product])
-
-  console.log('singleProduct new', product);
-  console.log('comments', comments);
-  const { _id } = useParams();
-  console.log('Id >>>', _id);
-
-  console.log('commentLine ---', commentLine);
+  }, [singleProduct.product]);
 
   useEffect( () => {
     dispatch(RequestProduct(_id));
@@ -57,6 +50,12 @@ const ViewProduct = (props) => {
 
   const handleClickOk = (event) => {
     event.preventDefault();
+    setAddToCart({...addToCart, product: [{
+      quantity: productCount
+      }]});
+    console.log('product count', productCount)
+    console.log('addToCart', addToCart);
+    dispatch(AddOrderToCartRequest(addToCart));
   };
 
   const handleClickOnCancel = () => {
@@ -179,7 +178,7 @@ const ViewProduct = (props) => {
         </div>
       </Modal>
 
-      <Modal open={addProductModal} onOk={handleClickOk} onCancel={handleClickOnCancel}>
+      <Modal open={addProductModal} onOk={handleClickOk} okText={'Add To Cart'} onCancel={handleClickOnCancel}>
         <div key={singleProduct?.product?._id}>
           Add to cart:
           <Button type="primary" shape="circle" onClick={handleDecrement}>-</Button>
