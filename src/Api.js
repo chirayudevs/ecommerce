@@ -10,16 +10,18 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const state = configStore.getState();
-  console.log(state);
+  console.log('interceptor req >>', state);
+
+  const token = JSON.parse(localStorage.getItem('user'));
 
   config.params = config.params || {};
-  config.params['auth'] = 'dfafdfd';
+  config.headers.Authorization = token;
 
   return config;
 });
 
 api.interceptors.response.use((response) => {
-
+  console.log('interceptor response >>>', response);
 
   return response;
 });

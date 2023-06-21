@@ -16,6 +16,7 @@ export const LoginRequest = (params) => {
     await Post('auth/login', params, config).then((response) => {
       const { data } = response.data
       localStorage.setItem('user', JSON.stringify(data.accessToken.accessToken))
+      localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken.refreshtoken))
       console.log('token', data);
       dispatch({
         type: LOGIN_SUCCESS,

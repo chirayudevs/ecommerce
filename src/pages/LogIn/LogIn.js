@@ -19,6 +19,8 @@ const LogIn = () => {
   const [selectedValue, setSelectedValue] = useState();
   const login = useSelector(state => state.logIn.login);
   const [messageApi, contextHolder] = message.useMessage();
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
   console.log('login', login?.data?.accessToken?.accessToken);
 
   const onChangeHandler = (e) => {
@@ -56,11 +58,21 @@ const LogIn = () => {
     //}
   };
 
+  const onClickForgotPassword = () => {
+    setIsButtonClicked(!isButtonClicked);
+    console.log('clicked', isButtonClicked);
+  };
+
+  const onClickResetLink = () => {
+
+  };
+
   return (
     <>
       {contextHolder}
       <div className="login-main">
         <div className="login-wrapper">
+          { isButtonClicked === false ?
           <Card className="card-wrapper">
             <form className="form-wrapper">
               <div>
@@ -75,14 +87,38 @@ const LogIn = () => {
 
               <div className="login-button">
                 <Button
-                  variant="success"
-                  onClick={() => onFinish()}
+                    variant="success"
+                    onClick={() => onFinish()}
                 >
                   Log In
                 </Button>
               </div>
+
+              <div>
+                <Button onClick={onClickForgotPassword}>Forgot password</Button>
+              </div>
+
             </form>
           </Card>
+              :
+            <Card className="card-wrapper">
+              <form className="form-wrapper">
+                <div>
+                  <label> Email </label>
+                  <input type="email" name="email" title="email" onChange={onChangeHandler} required={true}/>
+                </div>
+
+                <div className="login-button">
+                  <Button
+                      variant="success"
+                      onClick={() => onClickResetLink()}
+                  >
+                    Reset Link
+                  </Button>
+                </div>
+              </form>
+              </Card>
+          }
         </div>
       </div>
     </>

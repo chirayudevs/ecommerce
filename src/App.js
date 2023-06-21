@@ -7,6 +7,7 @@ import VerifyEmail from './pages/VerifyEmail/verifyEmail';
 import LogIn from './pages/LogIn/LogIn';
 import OrdersPage from './pages/orders';
 import './App.css';
+import ErrorPage from "./pages/ErrorPage/errorPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/verify' element={<VerifyEmail />} />
         <Route path='/' element={<LogIn />} />
         <Route path='/orders' element={<OrdersPage />} />
+        <Route path='/*' element={<ErrorPage />} />
       </Routes>
   );
 }

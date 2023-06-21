@@ -1,5 +1,5 @@
-import { RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS, RESEND_OTP_ERROR } from './actionTypes';
-import {Post} from "../../services/baseServices";
+import { RESEND_OTP_REQUEST, RESEND_OTP_SUCCESS } from './actionTypes';
+import { Post } from '../../services/baseServices';
 
 export const ResetOtpAction = () => {
   return async (dispatch) => {
