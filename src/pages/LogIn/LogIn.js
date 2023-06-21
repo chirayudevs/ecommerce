@@ -5,6 +5,7 @@ import { Alert, Button, message, Card, Space } from 'antd';
 import { LoginRequest } from '../../redux/login/actions';
 import './login.scss';
 import {ValidationError} from "../../components/errors/errors";
+import { ResetPasswordRequest } from '../../redux/resetPassword/actions';
 
 const LogIn = () => {
 
@@ -64,7 +65,7 @@ const LogIn = () => {
   };
 
   const onClickResetLink = () => {
-
+    dispatch(ResetPasswordRequest(user))
   };
 
   return (
