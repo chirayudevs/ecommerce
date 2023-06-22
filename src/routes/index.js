@@ -1,13 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import ProductView from './pages/ProductView';
-import SignUp from './pages/SignUp/signUp';
-import VerifyEmail from './pages/VerifyEmail/verifyEmail';
-import LogIn from './pages/LogIn/LogIn';
-import OrdersPage from './pages/orders';
-import ErrorPage from './pages/ErrorPage/errorPage';
-import ResetPassword from './pages/ResetPassword';
+import LandingPage from '../pages/LandingPage';
+import ProductView from '../pages/ProductView';
+import SignUp from '../pages/SignUp/signUp';
+import VerifyEmail from '../pages/VerifyEmail/verifyEmail';
+import LogIn from '../pages/LogIn/LogIn';
+import OrdersPage from '../pages/orders';
+import ErrorPage from '../pages/ErrorPage/errorPage';
+import ResetPassword from '../pages/ResetPassword';
 
 const AllRoutes = () => {
   return (

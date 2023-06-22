@@ -30,7 +30,7 @@ const ProductCard = () => {
     )
       return;
     setIsFetching(true);
-  }
+  };
 
   const fetchData = () => {
     dispatch(FetchProducts())
@@ -75,7 +75,7 @@ const ProductCard = () => {
                 title={product.name}
                 description={product.description}
               />
-              <div> sdfsdf </div>
+              <div> options can be added from here </div>
             </Card>
           </div>
         ))

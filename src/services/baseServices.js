@@ -17,4 +17,4 @@ export const Put = (url, data, config) => {
 
 export const Delete = (url, config) => {
   return axios.delete(APP_BASE_URL + url, config);
-}
+};
