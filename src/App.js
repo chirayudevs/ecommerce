@@ -8,10 +8,10 @@ import LogIn from './pages/LogIn/LogIn';
 import OrdersPage from './pages/orders';
 import './App.css';
 import ErrorPage from "./pages/ErrorPage/errorPage";
+import ResetPassword from "./pages/ResetPassword";
 
 const App = () => {
   return (
-    
       <Routes>
         <Route path='/home' element={<LandingPage />} />
         <Route path='/viewProduct/:_id' element={<ProductView />} />
@@ -19,6 +19,7 @@ const App = () => {
         <Route path='/verify' element={<VerifyEmail />} />
         <Route path='/' element={<LogIn />} />
         <Route path='/orders' element={<OrdersPage />} />
+        <Route path='/resetPassword' element={<ResetPassword />} />
         <Route path='/*' element={<ErrorPage />} />
       </Routes>
   );

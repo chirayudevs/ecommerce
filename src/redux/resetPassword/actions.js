@@ -5,7 +5,7 @@ export const ResetPasswordRequest = (params) => {
   return async (dispatch) => {
     dispatch({type: RESET_PASSWORD_REQUEST});
 
-    await Post('/auth/password/email', params).then((response) =>
+    await Post('auth/password/email', params).then((response) =>
       dispatch({
         type: RESET_PASSWORD_SUCCESS,
         payload: response,

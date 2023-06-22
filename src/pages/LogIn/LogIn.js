@@ -14,6 +14,10 @@ const LogIn = () => {
     password : ""
   };
 
+  const initValue = {
+    email: ""
+  }
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [user, setUser] = useState(initialValues);
@@ -21,6 +25,7 @@ const LogIn = () => {
   const login = useSelector(state => state.logIn.login);
   const [messageApi, contextHolder] = message.useMessage();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [resetMail, setResetMail] = useState(initValue);
 
   console.log('login', login?.data?.accessToken?.accessToken);
 
@@ -65,7 +70,8 @@ const LogIn = () => {
   };
 
   const onClickResetLink = () => {
-    dispatch(ResetPasswordRequest(user))
+    dispatch(ResetPasswordRequest(resetMail));
+    navigate('/ResetPassword')
   };
 
   return (
@@ -106,19 +112,25 @@ const LogIn = () => {
               <form className="form-wrapper">
                 <div>
                   <label> Email </label>
-                  <input type="email" name="email" title="email" onChange={onChangeHandler} required={true}/>
+                  <input
+                    type="email"
+                    name="email"
+                    title="email"
+                    onChange={(e) => setResetMail({email: e.target.value})}
+                    required={true}
+                  />
                 </div>
 
                 <div className="login-button">
                   <Button
-                      variant="success"
-                      onClick={() => onClickResetLink()}
+                    variant="success"
+                    onClick={() => onClickResetLink()}
                   >
                     Reset Link
                   </Button>
                 </div>
               </form>
-              </Card>
+            </Card>
           }
         </div>
       </div>
