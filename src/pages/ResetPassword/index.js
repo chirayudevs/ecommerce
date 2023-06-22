@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Card } from 'antd';
+import { ResetPasswordConfirm } from '../../redux/resetPassword/actions';
 
 const ResetPassword = () => {
 
@@ -10,11 +12,16 @@ const ResetPassword = () => {
     confirmpassword: ""
   };
 
+  const dispatch = useDispatch();
   const [resetValues, setResetValues] = useState(initialValues);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setResetValues({...resetValues, [name]: value});
+  };
+
+  const onClickReset = () => {
+    dispatch(ResetPasswordConfirm(resetValues))
   };
 
   return (
@@ -32,19 +39,19 @@ const ResetPassword = () => {
           </div>
 
           <div>
-            <label> Password </label>
+            <label> New Password </label>
             <input type="password" name="newpassword" title="New password" onChange={onChangeHandler} required={true}/>
           </div>
 
           <div>
-            <label> Password </label>
+            <label> Confirm Password </label>
             <input type="password" name="confirmpassword" title="Confirm password" onChange={onChangeHandler} required={true}/>
           </div>
 
           <div className="login-button">
             <Button
               variant="success"
-              //onClick={() => onFinish()}
+              onClick={() => onClickReset()}
             >
               Reset
             </Button>
