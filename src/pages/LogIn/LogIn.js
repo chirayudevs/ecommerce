@@ -59,7 +59,7 @@ const LogIn = () => {
       //navigate('/home');
     }*/
     //else {
-      dispatch(LoginRequest(user))
+    dispatch(LoginRequest(user))
       navigate('/home');
     //}
   };
