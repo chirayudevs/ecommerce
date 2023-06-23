@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Modal } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { AddProductAction } from '../../redux/addProduct/actions';
+import Logout from '../logout/logout';
 import './header.scss';
 
 const Header = () => {
@@ -109,6 +110,9 @@ const Header = () => {
         </Modal>
         <span className="profileImage">
           { user }
+        </span>
+        <span>
+          <Logout />
         </span>
       </div>
     </header>

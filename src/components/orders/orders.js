@@ -25,7 +25,7 @@ const Orders = () => {
       <div className="content-main">
 
         <div>
-           {orderedProducts?.length && orderedProducts[0]?.map((order) =>
+           {orderedProducts?.length && orderedProducts?.map((order) =>
             <Card>
               <div>
                 <img
