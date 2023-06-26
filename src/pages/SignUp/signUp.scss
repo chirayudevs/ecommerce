@@ -1,22 +1,35 @@
-.signUp-form-main {
+.signUp-page-main {
   display: flex;
-  justify-content: center;
-  position: relative;
-  top: 200px;
-  margin: auto;
+  overflow: hidden;
 
-  .form-wrapper {
+  .signUp-image-wrapper {
+    position: relative;
+    background-image: url('../../assets/images/homeImg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1000px;
+    width: 50%;
+  }
+
+  .signUp-form-main {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+    justify-content: center;
+    position: relative;
+    margin: auto;
 
-  .signUp-button {
-    margin-top: 10px;
-  }
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
 
-  .card-wrapper {
-    box-shadow: 5px 5px black;
-    border-color: black;
+    .signUp-button {
+      margin-top: 10px;
+    }
+
+    .card-wrapper {
+      box-shadow: 5px 5px black;
+      border-color: black;
+    }
   }
 }

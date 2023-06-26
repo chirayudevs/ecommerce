@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ResendEmailAction, VerifyEmailAction } from '../../redux/verifyEmail/actions';
+import LockOutlined from '@ant-design/icons/lib/icons/LockOutlined';
 import { Button, Modal } from 'antd';
+import { ResendEmailAction, VerifyEmailAction } from '../../redux/verifyEmail/actions';
 import './verifyEmail.scss';
 
 const VerifyEmail = () => {
@@ -61,17 +62,79 @@ const VerifyEmail = () => {
     setIsModalOpen(false);
   };
 
+  const inputs = document.querySelectorAll(".otp-field input");
+
+  inputs.forEach((input, index) => {
+    input.dataset.index = index;
+    input.addEventListener("keyup", handleOtp);
+    input.addEventListener("paste", handleOnPasteOtp);
+  });
+
+  function handleOtp(e) {
+
+    const input = e.target;
+    let value = input.value;
+    let isValidInput = value.match(/[0-9a-z]/gi);
+    input.value = "";
+    input.value = isValidInput ? value[0] : "";
+
+    let fieldIndex = input.dataset.index;
+    if (fieldIndex < inputs.length - 1 && isValidInput) {
+      input.nextElementSibling.focus();
+    }
+
+    if (e.key === "Backspace" && fieldIndex > 0) {
+      input.previousElementSibling.focus();
+    }
+
+    if (fieldIndex == inputs.length - 1 && isValidInput) {
+      submit();
+    }
+  }
+
+  function handleOnPasteOtp(e) {
+    const data = e.clipboardData.getData("text");
+    const value = data.split("");
+    if (value.length === inputs.length) {
+      inputs.forEach((input, index) => (input.value = value[index]));
+      submit();
+    }
+  }
+
+  function submit() {
+    console.log("Submitting...");
+    // 👇 Entered OTP
+    let otp = "";
+    inputs.forEach((input) => {
+      otp += input.value;
+      input.disabled = true;
+      input.classList.add("disabled");
+    });
+    console.log(otp);
+    // 👉 Call API below
+  }
+
   return (
     <div className="verify-form-wrapper">
+      <div className="verify-otp-header">
+        <LockOutlined />
+        <div>
+          Verify OTP
+        </div>
+      </div>
       <form>
         <div className="form-fields">
           <label> Email </label>
-          <input type="text" name="email" title="email" onChange={onChangeHandler}/>
+          <input type="text" name="email" title="email" onChange={onChangeHandler} />
         </div>
 
-        <div className="form-fields">
-          <label> Code </label>
-          <input type="number" name="code" title="code" onChange={onChangeHandler}/>
+        <div className="form-fields otp-field">
+          <input type="text" maxLength="1" onChange={onChangeHandler}/>
+          <input type="text" maxLength="1" onChange={onChangeHandler}/>
+          <input className="space" type="text" maxLength="1" onChange={onChangeHandler}/>
+          <input type="text" maxLength="1" onChange={onChangeHandler}/>
+          <input type="text" maxLength="1" onChange={onChangeHandler}/>
+          <input type="text" maxLength="1" onChange={onChangeHandler}/>
         </div>
 
         <div className="verify-buttons">
@@ -93,7 +156,6 @@ const VerifyEmail = () => {
           </div>
         </form>
       </Modal>
-
     </div>
   )
 };

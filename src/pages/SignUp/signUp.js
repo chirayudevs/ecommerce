@@ -61,40 +61,44 @@ const SignUp = () => {
   return (
     <>
       {contextHolder}
-      <div className="signUp-form-main">
-        <Card className="card-wrapper">
-          <form className="form-wrapper">
-            <div>
-              <label> name </label>
-              <input type="text" name="name" title="name" onChange={onChangeHandler}/>
-            </div>
+      <div className="signUp-page-main">
+        <div className="signUp-image-wrapper">
+        </div>
+        <div className="signUp-form-main">
+          <Card className="card-wrapper">
+            <form className="form-wrapper">
+              <div>
+                <label> name </label>
+                <input type="text" name="name" title="name" onChange={onChangeHandler}/>
+              </div>
 
-            <div>
-              <label> email </label>
-              <input type="text" name="email" title="email" onChange={onChangeHandler}/>
-            </div>
+              <div>
+                <label> email </label>
+                <input type="text" name="email" title="email" onChange={onChangeHandler}/>
+              </div>
 
-            <div>
-              <label> Username </label>
-              <input type="text" name="username" title="username" onChange={onChangeHandler}/>
-            </div>
+              <div>
+                <label> Username </label>
+                <input type="text" name="username" title="username" onChange={onChangeHandler}/>
+              </div>
 
-            <div>
-              <label> Password </label>
-              <input type="password" name="password" title="password" onChange={onChangeHandler}/>
-            </div>
+              <div>
+                <label> Password </label>
+                <input type="password" name="password" title="password" onChange={onChangeHandler}/>
+              </div>
 
-            <div className="signUp-button">
-              <Button
-                variant="success"
-                onClick={() => onFinish()}
-              >
-                Sign Up
-              </Button>
-            </div>
-          </form>
+              <div className="signUp-button">
+                <Button
+                  variant="success"
+                  onClick={() => onFinish()}
+                >
+                  Sign Up
+                </Button>
+              </div>
+            </form>
 
-        </Card>
+          </Card>
+        </div>
       </div>
     </>
   )
