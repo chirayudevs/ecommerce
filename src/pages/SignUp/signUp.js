@@ -59,48 +59,54 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="sign-up-form-wrapper">
       {contextHolder}
       <div className="signUp-page-main">
         <div className="signUp-image-wrapper">
         </div>
         <div className="signUp-form-main">
-          <Card className="card-wrapper">
-            <form className="form-wrapper">
-              <div>
-                <label> name </label>
-                <input type="text" name="name" title="name" onChange={onChangeHandler}/>
+          <div className="container">
+            <form>
+              <div className="form-row">
+                <div className="input-data">
+                  <input type="text" name="name" title="name" onChange={onChangeHandler} required />
+                  <div className="underline" />
+                  <label htmlFor="">Name</label>
+                </div>
+                <div className="input-data">
+                  <input type="text" name="email" title="email" onChange={onChangeHandler} required />
+                  <div className="underline" />
+                  <label htmlFor="">Email</label>
+                </div>
               </div>
-
-              <div>
-                <label> email </label>
-                <input type="text" name="email" title="email" onChange={onChangeHandler}/>
+              <div className="form-row">
+                <div className="input-data">
+                  <input type="text" name="username" title="username" onChange={onChangeHandler} required />
+                  <div className="underline" />
+                  <label htmlFor="">Username</label>
+                </div>
+                <div className="input-data">
+                  <input type="password" name="password" title="password" onChange={onChangeHandler} required />
+                  <div className="underline" />
+                  <label htmlFor="">Password</label>
+                </div>
               </div>
-
-              <div>
-                <label> Username </label>
-                <input type="text" name="username" title="username" onChange={onChangeHandler}/>
-              </div>
-
-              <div>
-                <label> Password </label>
-                <input type="password" name="password" title="password" onChange={onChangeHandler}/>
-              </div>
-
-              <div className="signUp-button">
-                <Button
-                  variant="success"
-                  onClick={() => onFinish()}
-                >
-                  Sign Up
-                </Button>
+              <div className="form-row">
+                <div className="input-data textarea">
+                  <br/>
+                  <div className="form-row submit-btn">
+                    <div className="input-data">
+                      <div className="inner" />
+                      <input type="submit" value="submit" onClick={() => onFinish()} />
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
-
-          </Card>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 };
 

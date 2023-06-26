@@ -5,6 +5,7 @@ import LockOutlined from '@ant-design/icons/lib/icons/LockOutlined';
 import { Button, Modal } from 'antd';
 import { ResendEmailAction, VerifyEmailAction } from '../../redux/verifyEmail/actions';
 import './verifyEmail.scss';
+import Card from "antd/es/card";
 
 const VerifyEmail = () => {
 
@@ -116,37 +117,40 @@ const VerifyEmail = () => {
 
   return (
     <div className="verify-form-wrapper">
-      <div className="verify-otp-header">
-        <LockOutlined />
-        <div>
-          Verify OTP
+      <Card>
+        <div className="verify-otp-header">
+          <LockOutlined />
+          <div>
+            Verify OTP
+          </div>
         </div>
-      </div>
-      <form>
-        <div className="form-fields">
-          <label> Email </label>
-          <input type="text" name="email" title="email" onChange={onChangeHandler} />
-        </div>
+        <form>
+          <div className="form-fields">
+            <label> Email </label>
+            <input type="text" name="email" title="email" onChange={onChangeHandler} />
+          </div>
 
-        <div className="form-fields otp-field">
-          <input type="text" maxLength="1" onChange={onChangeHandler}/>
-          <input type="text" maxLength="1" onChange={onChangeHandler}/>
-          <input className="space" type="text" maxLength="1" onChange={onChangeHandler}/>
-          <input type="text" maxLength="1" onChange={onChangeHandler}/>
-          <input type="text" maxLength="1" onChange={onChangeHandler}/>
-          <input type="text" maxLength="1" onChange={onChangeHandler}/>
-        </div>
+          <div className="form-fields otp-field">
+            <input type="text" maxLength="1" onChange={onChangeHandler}/>
+            <input type="text" maxLength="1" onChange={onChangeHandler}/>
+            <input className="space" type="text" maxLength="1" onChange={onChangeHandler}/>
+            <input type="text" maxLength="1" onChange={onChangeHandler}/>
+            <input type="text" maxLength="1" onChange={onChangeHandler}/>
+            <input type="text" maxLength="1" onChange={onChangeHandler}/>
+          </div>
 
-        <div className="verify-buttons">
-          <Button variant="success" onClick={() => onFinish()}>
-            Verify
-          </Button>
+          <div className="verify-buttons">
+            <Button variant="success" onClick={() => onFinish()}>
+              Verify
+            </Button>
 
-          <Button variant="success" onClick={showModal}>
-            Resend Otp
-          </Button>
-        </div>
-      </form>
+            <Button variant="success" onClick={showModal}>
+              Resend Otp
+            </Button>
+          </div>
+        </form>
+      </Card>
+
 
       <Modal title="Add Product" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <form>
