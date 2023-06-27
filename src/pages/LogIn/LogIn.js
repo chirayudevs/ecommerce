@@ -45,7 +45,7 @@ const LogIn = () => {
     });
   };
 
-  const onFinish = () => {
+  const onFinish =async (event) => {
     console.log('user email', login?.user?.email);
 
     //const userData = login
@@ -59,7 +59,8 @@ const LogIn = () => {
       //navigate('/home');
     }*/
     //else {
-    dispatch(LoginRequest(user))
+    event.preventDefault();
+    await dispatch(LoginRequest(user))
       navigate('/home');
     //}
   };
@@ -95,7 +96,7 @@ const LogIn = () => {
               <div className="login-button">
                 <Button
                     variant="success"
-                    onClick={() => onFinish()}
+                    onClick={(event) => onFinish(event)}
                 >
                   Log In
                 </Button>

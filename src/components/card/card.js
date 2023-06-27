@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Card } from 'antd';
+import {Card, message} from 'antd';
 import { FetchProducts } from '../../redux/products/actions';
 import SkeletonLoader from '../skeleton/skeleton';
 import './card.scss';
@@ -14,13 +14,19 @@ const ProductCard = () => {
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
   const [data, setData] = useState([]);
+  const [messageApi, contextHolder] = message.useMessage();
   const allProducts = useSelector(state => state.products.products);
   const loader = useSelector(state => state.products.loading);
+  const login = useSelector(state => state.logIn.login);
+
+  const accessToken = login?.data?.accessToken?.accessToken;
 
   useEffect(() => {
-    dispatch(FetchProducts());
+    if(accessToken) {
+      dispatch(FetchProducts());
+    }
     window.addEventListener("scroll", handleScroll);
-  }, [dispatch]);
+  }, [dispatch, login]);
 
   const handleScroll = () => {
     if(
@@ -49,6 +55,14 @@ const ProductCard = () => {
     fetchData();
     setIsFetching(false);
   };
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'User registered successfully',
+    })
+  };
+
 
   return (
     <>

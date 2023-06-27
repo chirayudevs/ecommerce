@@ -116,50 +116,52 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div className="verify-form-wrapper">
-      <Card>
-        <div className="verify-otp-header">
-          <LockOutlined />
-          <div>
-            Verify OTP
+    <div className="verify-form-main">
+      <div className="verify-form-wrapper">
+        <Card className="verify-card">
+          <div className="verify-otp-header">
+            <LockOutlined />
+            <div>
+              Verify OTP
+            </div>
           </div>
-        </div>
-        <form>
-          <div className="form-fields">
-            <label> Email </label>
-            <input type="text" name="email" title="email" onChange={onChangeHandler} />
-          </div>
+          <form>
+            <div className="form-fields">
+              <label className="font-styles"> Email </label>
+              <input type="text" name="email" title="email" onChange={onChangeHandler} />
+            </div>
 
-          <div className="form-fields otp-field">
-            <input type="text" maxLength="1" onChange={onChangeHandler}/>
-            <input type="text" maxLength="1" onChange={onChangeHandler}/>
-            <input className="space" type="text" maxLength="1" onChange={onChangeHandler}/>
-            <input type="text" maxLength="1" onChange={onChangeHandler}/>
-            <input type="text" maxLength="1" onChange={onChangeHandler}/>
-            <input type="text" maxLength="1" onChange={onChangeHandler}/>
-          </div>
+            <div className="form-fields otp-field">
+              <input type="text" maxLength="1" onChange={onChangeHandler}/>
+              <input type="text" maxLength="1" onChange={onChangeHandler}/>
+              <input className="space" type="text" maxLength="1" onChange={onChangeHandler}/>
+              <input type="text" maxLength="1" onChange={onChangeHandler}/>
+              <input type="text" maxLength="1" onChange={onChangeHandler}/>
+              <input type="text" maxLength="1" onChange={onChangeHandler}/>
+            </div>
 
-          <div className="verify-buttons">
-            <Button variant="success" onClick={() => onFinish()}>
-              Verify
-            </Button>
+            <div className="verify-buttons">
+              <Button type="primary" variant="success" onClick={() => onFinish()}>
+                Verify
+              </Button>
 
-            <Button variant="success" onClick={showModal}>
-              Resend Otp
-            </Button>
-          </div>
-        </form>
-      </Card>
+              <Button variant="success" onClick={showModal}>
+                Resend Otp
+              </Button>
+            </div>
+          </form>
+        </Card>
 
 
-      <Modal title="Add Product" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <form>
-          <div className="form-fields">
-            <label> Email </label>
-            <input type="text" name="email" title="email" onChange={handleResendCode}/>
-          </div>
-        </form>
-      </Modal>
+        <Modal title="Add Product" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <form>
+            <div className="form-fields">
+              <label> Email </label>
+              <input type="text" name="email" title="email" onChange={handleResendCode}/>
+            </div>
+          </form>
+        </Modal>
+      </div>
     </div>
   )
 };

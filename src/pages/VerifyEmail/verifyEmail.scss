@@ -1,3 +1,8 @@
+.verify-form-main {
+  height: 1000px;
+  background: aliceblue;
+}
+
 .verify-form-wrapper {
   display: grid;
   justify-content: center;
@@ -29,9 +34,9 @@
   border-radius: 5px;
   margin: 2px;
   border: 2px solid #55525c;
-  background: #21232d;
+  background: #fff;
   font-weight: bold;
-  color: #fff;
+  color: #21232d;
   outline: none;
   transition: all 0.1s;
 }
@@ -48,4 +53,16 @@
 
 .form-fields {
   margin: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  line-height: 1.9;
+}
+
+.font-styles {
+  font-size: 18px;
+  font-family: serif;
+}
+
+.verify-card {
+  box-shadow: 5px 5px 5px slategray;
 }

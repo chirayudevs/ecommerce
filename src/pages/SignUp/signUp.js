@@ -35,12 +35,6 @@ const SignUp = () => {
     console.log('set state',user);
   };
 
-  const success = () => {
-    messageApi.open({
-      type: 'success',
-      content: 'User registered successfully',
-    })
-  };
 
   const onFinish = (values) => {
 
@@ -49,7 +43,6 @@ const SignUp = () => {
     } else {
       dispatch(FetchUser(user));
       navigate('/verify');
-      success()
     }
     //console.log('Success:', user);
   };
